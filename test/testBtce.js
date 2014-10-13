@@ -15,7 +15,7 @@ describe('Btce', function () {
     describe('BtceRest', function () {
         before(function(done) {
             apirest = new BtceEx.RestClient(config);
-            apirest.on('error', function(error){
+            apirest.ee().on('error', function(error){
                 assert(error)
                 done(error);
             });
@@ -42,7 +42,7 @@ describe('Btce', function () {
         it('BtceMonitorOrderBookOk', function (done) {
             this.timeout(20e3);
             var numBook = 0;
-            apirest.on('orderBook', function(depth){
+            apirest.ee().on('orderBook', function(depth){
                 assert(depth)
                 assert(depth.bids)
                 assert(depth.asks);
@@ -57,7 +57,7 @@ describe('Btce', function () {
         it('BtceMonitorOrderBookDiff', function (done) {
             this.timeout(20e3);
             var numOps = 0;
-            apirest.on('orderBookDiff', function(diff){
+            apirest.ee().on('orderBookDiff', function(diff){
                 assert(diff)
                 console.log(JSON.stringify(diff))
                 numOps++;
