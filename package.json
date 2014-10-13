@@ -19,6 +19,7 @@
       "pusher-client":"0.2.2",
       "bitstamp":"0.1.8",
       "btc-e": "0.0.16",
+      "airbex-client":"git://github.com/FredericHeem/airbex-client.git#6327f60b17984043832a4fb84a2aff4d7fb01d5c",
       "num": "git://github.com/abrkn/node-num.git#v0.2.3",
       "winston": "0.8.x",
       "konphyg":"1.4.0"

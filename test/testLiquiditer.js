@@ -15,7 +15,9 @@ describe('Liquiditer', function () {
     
     describe('LiquiditerOk', function () {
         var liquiditer = new Liquiditer(config)
-
+        before(function(done){
+            liquiditer.start().then(done, done)
+        }),
         it('LiquiditerBalances', function (done) {
             liquiditer.getBalances()
             .then(done)
