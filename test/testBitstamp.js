@@ -19,7 +19,7 @@ function totalBidAsk(bidasks){
 describe('Bitstamp', function () {
     "use strict";
     
-    describe('WebSocketPublic', function () {
+    describe('BitstampWebSocket', function () {
         var apiws = new BitstampEx.WebSocketClient(config);
         before(function(done) {
             apiws.start().then(done, done);
@@ -28,9 +28,9 @@ describe('Bitstamp', function () {
             apiws.stop();
             done();
         });
-        it('OrderBookPartial', function (done) {
+        it('BitstampOrderBookPartial', function (done) {
             this.timeout(30e3);
-            apiws.on("orderBook", function(orderBook){
+            apiws.ee().once("orderBook", function(orderBook){
                 assert(orderBook);
                 console.log("orderBook:")
                 //console.log(JSON.stringify(orderBook));
@@ -39,18 +39,18 @@ describe('Bitstamp', function () {
                 done();
             })
         });
-        it('OrderBookDiff', function (done) {
-            this.timeout(120e3);
-            apiws.on("orderBookDiff", function(orderBookDiff){
-                assert(orderBookDiff);
-                console.log("orderBookDiff:")
-                console.log(JSON.stringify(orderBookDiff));
-                done();
-            })
-        });
+//        it('BitstampOrderBookDiff', function (done) {
+//            this.timeout(120e3);
+//            apiws.on("orderBookDiff", function(orderBookDiff){
+//                assert(orderBookDiff);
+//                console.log("orderBookDiff:")
+//                console.log(JSON.stringify(orderBookDiff));
+//                //done();
+//            })
+//        });
     });
     
-    describe('Rest', function () {
+    describe('BitstampRest', function () {
         var apirest = new BitstampEx.RestClient(config);
         it('BitstampBalance', function (done) {
             this.timeout(30e3);
