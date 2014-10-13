@@ -1,0 +1,14 @@
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
+test/bower_components
+npm-debug.log
+test/config/config.local.json
+.README.md.html
+coverage
+.coveralls.yml
+lib/config/config.json
+.project
+test/config/config.local.json
