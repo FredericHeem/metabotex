@@ -47,7 +47,7 @@ describe('Btce', function () {
                 assert(depth.bids)
                 assert(depth.asks);
                 numBook++;
-                if(numBook == 5){
+                if(numBook === 3){
                     done();
                 }
             });

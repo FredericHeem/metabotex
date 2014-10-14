@@ -30,24 +30,33 @@ describe('Bitstamp', function () {
         });
         it('BitstampOrderBookPartial', function (done) {
             this.timeout(30e3);
-            apiws.ee().once("orderBook", function(orderBook){
+            var numOps = 0;
+            apiws.ee().on("orderBook", function(orderBook){
                 assert(orderBook);
                 console.log("orderBook:")
                 //console.log(JSON.stringify(orderBook));
                 console.log("total bids: ", totalBidAsk(orderBook.bids));
                 console.log("total asks: ", totalBidAsk(orderBook.asks));
-                done();
+                numOps++;
+                if(numOps === 5){
+                    done();
+                }
             })
         });
-//        it('BitstampOrderBookDiff', function (done) {
-//            this.timeout(120e3);
-//            apiws.on("orderBookDiff", function(orderBookDiff){
-//                assert(orderBookDiff);
-//                console.log("orderBookDiff:")
-//                console.log(JSON.stringify(orderBookDiff));
-//                //done();
-//            })
-//        });
+        it('BitstampOrderBookDiff', function (done) {
+            this.timeout(120e3);
+            var numOps = 0;
+            apiws.ee().on("orderBookDiff", function(orderBookDiff){
+                assert(orderBookDiff);
+                console.log("orderBookDiff:")
+                console.log(JSON.stringify(orderBookDiff));
+               
+                numOps++;
+                if(numOps === 5){
+                    done();
+                }
+            })
+        });
     });
     
     describe('BitstampRest', function () {

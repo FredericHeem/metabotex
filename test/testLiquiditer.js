@@ -12,7 +12,7 @@ var Liquiditer = require('../lib/Liquiditer')
 
 describe('Liquiditer', function () {
     "use strict";
-    
+    var market = "BTCUSD";
     describe('LiquiditerOk', function () {
         var liquiditer = new Liquiditer(config)
         before(function(done){
@@ -24,9 +24,13 @@ describe('Liquiditer', function () {
             .fail(done);
         });
         it('LiquiditerdDepth', function (done) {
-            liquiditer.getDepth("BTCUSD")
+            liquiditer.getDepth(market)
             .then(done)
             .fail(done);
+        });
+        it('LiquiditerdMonitorOrderBook', function (done) {
+            this.timeout(60e3);
+            liquiditer.monitorOrderBook(market)
         });
     });
 });
