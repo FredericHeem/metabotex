@@ -22,7 +22,14 @@ describe('Bitstamp', function () {
     describe('BitstampWebSocket', function () {
         var apiws = new BitstampEx.WebSocketClient(config);
         before(function(done) {
-            apiws.start().then(done, done);
+            apiws.start()
+            .then(function(){
+                debug("started");
+                apiws.monitorOrderBook();
+                done();
+            })
+            .fail(done);
+            
         });
         after(function(done) {
             apiws.stop();
@@ -31,6 +38,7 @@ describe('Bitstamp', function () {
         it('BitstampOrderBookPartial', function (done) {
             this.timeout(30e3);
             var numOps = 0;
+            console.log("BitstampOrderBookPartial start:")
             apiws.ee().on("orderBook", function(orderBook){
                 assert(orderBook);
                 console.log("orderBook:")
@@ -43,20 +51,20 @@ describe('Bitstamp', function () {
                 }
             })
         });
-        it('BitstampOrderBookDiff', function (done) {
-            this.timeout(120e3);
-            var numOps = 0;
-            apiws.ee().on("orderBookDiff", function(orderBookDiff){
-                assert(orderBookDiff);
-                console.log("orderBookDiff:")
-                console.log(JSON.stringify(orderBookDiff));
-               
-                numOps++;
-                if(numOps === 5){
-                    done();
-                }
-            })
-        });
+//        it('BitstampOrderBookDiff', function (done) {
+//            this.timeout(120e3);
+//            var numOps = 0;
+//            apiws.ee().on("orderBookDiff", function(orderBookDiff){
+//                assert(orderBookDiff);
+//                console.log("orderBookDiff:")
+//                console.log(JSON.stringify(orderBookDiff));
+//               
+//                numOps++;
+//                if(numOps === 5){
+//                    done();
+//                }
+//            })
+//        });
     });
     
     describe('BitstampRest', function () {

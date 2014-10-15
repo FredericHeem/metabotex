@@ -54,19 +54,19 @@ describe('Btce', function () {
 
             apirest.monitorOrderBook("BTCUSD");
         });
-        it('BtceMonitorOrderBookDiff', function (done) {
-            this.timeout(20e3);
-            var numOps = 0;
-            apirest.ee().on('orderBookDiff', function(diff){
-                assert(diff)
-                console.log(JSON.stringify(diff))
-                numOps++;
-                if(numOps == 10){
-                    done();
-                }
-            });
-
-            apirest.monitorOrderBook("BTCUSD");
-        });
+//        it('BtceMonitorOrderBookDiff', function (done) {
+//            this.timeout(20e3);
+//            var numOps = 0;
+//            apirest.ee().on('orderBookDiff', function(diff){
+//                assert(diff)
+//                console.log(JSON.stringify(diff))
+//                numOps++;
+//                if(numOps == 10){
+//                    done();
+//                }
+//            });
+//
+//            apirest.monitorOrderBook("BTCUSD");
+//        });
     });
 });

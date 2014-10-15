@@ -29,7 +29,7 @@ describe('Liquiditer', function () {
             .fail(done);
         });
         it('LiquiditerdMonitorOrderBook', function (done) {
-            this.timeout(60000e3);
+            this.timeout(30e3);
             liquiditer.monitorOrderBook(market)
         });
     });
