@@ -14,7 +14,7 @@ describe('Btce', function () {
     
     describe('BtceRest', function () {
         before(function(done) {
-            apirest = new BtceEx.RestClient(config);
+            apirest = new BtceEx.RestClient(config.exchanges.btce);
             apirest.ee().on('error', function(error){
                 assert(error)
                 done(error);

@@ -16,6 +16,7 @@ describe('Liquiditer', function () {
     describe('LiquiditerOk', function () {
         var liquiditer = new Liquiditer(config)
         before(function(done){
+            this.timeout(5e3)
             liquiditer.start().then(done, done)
         }),
         it('LiquiditerBalances', function (done) {
@@ -29,7 +30,7 @@ describe('Liquiditer', function () {
             .fail(done);
         });
         it('LiquiditerdMonitorOrderBook', function (done) {
-            this.timeout(30e3);
+            this.timeout(200e3);
             liquiditer.monitorOrderBook(market)
         });
     });
