@@ -12,3 +12,4 @@ coverage
 lib/config/config.json
 .project
 test/config/config.local.json
+test/config/config.demo.json
