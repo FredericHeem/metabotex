@@ -1,28 +1,3 @@
 {
-    "market":"BTCUSD",
-    "baseCurrency":"BTC",
-    "quoteCurrency":"USD",
-    "currencies":["BTC", "USD"],
-    "exchanges":{
-        "bitstamp":{
-            "driver": "Bitstamp",
-            "enabled": false,
-            "key":"",
-            "secret":"",
-            "client_id":""
-        },
-        "btce":{
-            "driver": "Btce",
-            "enabled": true,
-            "key":"",
-            "secret":"",
-            "currencies":["BTC", "USD"],
-            "fee_ask":"2",
-            "fee_bid":"-1"
-        }
-    },
-    "target":{
-        "urlBaseRest":"",
-        "apiKey":""
-    }
+
 }
