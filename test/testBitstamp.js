@@ -68,12 +68,13 @@ describe('Bitstamp', function () {
     });
     
     describe('BitstampRest', function () {
-        var apirest = new BitstampEx.RestClient(config);
+        var apirest = new BitstampEx.RestClient(config.exchanges.bitstamp);
         it('BitstampBalance', function (done) {
             this.timeout(30e3);
             apirest.getBalances()
-            .then(function(balance){
-                assert(balance)
+            .then(function(balances){
+                assert(balances)
+                assert(balances['BTC'])
                 done();
             })
             .fail(done)

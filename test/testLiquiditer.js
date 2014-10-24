@@ -29,9 +29,9 @@ describe('Liquiditer', function () {
             .then(done)
             .fail(done);
         });
-        it('LiquiditerdMonitorOrderBook', function (done) {
-            this.timeout(200e3);
-            liquiditer.monitorOrderBook(market)
-        });
+//        it('LiquiditerdMonitorOrderBook', function (done) {
+//            this.timeout(30e3);
+//            liquiditer.monitorOrderBook(market)
+//        });
     });
 });

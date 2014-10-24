@@ -82,7 +82,7 @@ describe('DepthUtils', function () {
         it('addFees', function (done) {
             var asks = [["500", "1"]];
             var fee = "2";
-            var result = [["510", "1"]];
+            var result = [["510.00000", "1"]];
             console.log(DepthUtil.addFees(asks, fee))
             assert(_.isEqual(DepthUtil.addFees(asks, fee), result));
             done();

@@ -23,8 +23,9 @@ describe('Btce', function () {
         });
         it('BtceBalance', function (done) {
             apirest.getBalances()
-            .then(function(balance){
-                assert(balance)
+            .then(function(balances){
+                assert(balances)
+                assert(balances['BTC'])
                 done();
             })
             .fail(done)
