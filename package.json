@@ -70,7 +70,12 @@
     "test": "NODE_ENV=demo ./node_modules/mocha/bin/mocha",
     "coverage": "NODE_ENV=demo istanbul cover _mocha -- test/*.js",
     "coveralls": "npm run-script coverage && coveralls < coverage/lcov.info",
-    "codeclimate": "CODECLIMATE_REPO_TOKEN= codeclimate < coverage/lcov.info"
+    "codeclimate": "CODECLIMATE_REPO_TOKEN= codeclimate < coverage/lcov.info",
+    "bitfinexlocal":"NODE_ENV=bitfinexlocal node lib/LiquiditerApp.js",
+    "bitfinexdemo":"NODE_ENV=bitfinex nohup node lib/LiquiditerApp.js  > logbitfinex.txt&",
+    "bitstamplocal":"NODE_ENV=bitstamplocal node lib/LiquiditerApp.js",
+    "bitstampdemo":"NODE_ENV=bitstamp nohup node lib/LiquiditerApp.js  > logbitstamp.txt&"
+        
   },
   "readmeFilename": "README.md"
 }
