@@ -4,25 +4,25 @@ var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
 var config = require('./configTest.js')();
-var debug = require('debug')('Btce');
-var BtceEx = require('../lib/Btce');
+var debug = require('debug')('Airbex');
+var BitfinexEx = require('../lib/Bitfinex');
 var num = require('num');
 
-describe('Btce', function () {
+describe('Bitfinex', function () {
     "use strict";
-    var apirest;
+    var api;
     
-    describe('BtceRest', function () {
+    describe('BitfinexRest', function () {
         before(function(done) {
-            apirest = new BtceEx.RestClient(config.exchanges.btce);
-            apirest.ee().on('error', function(error){
+            api = new BitfinexEx.RestClient(config.exchanges.bitfinex);
+            api.ee().on('error', function(error){
                 assert(error)
                 done(error);
             });
             done()
         });
-        it('BtceBalance', function (done) {
-            apirest.getBalances()
+        it('BitfinexBalance', function (done) {
+            api.getBalances()
             .then(function(balances){
                 assert(balances)
                 assert(balances['BTC'])
@@ -30,8 +30,8 @@ describe('Btce', function () {
             })
             .fail(done)
         });
-        it('BtceDepth', function (done) {
-            apirest.getDepth("BTCUSD")
+        it('BitfinexDepth', function (done) {
+            api.getDepth("BTCUSD")
             .then(function(depth){
                 assert(depth)
                 assert(depth.bids)
@@ -40,10 +40,10 @@ describe('Btce', function () {
             })
             .fail(done)
         });
-        it('BtceMonitorOrderBookOk', function (done) {
+        it('BitfinexMonitorOrderBookOk', function (done) {
             this.timeout(20e3);
             var numBook = 0;
-            apirest.ee().on('orderBook', function(depth){
+            api.ee().on('orderBook', function(depth){
                 assert(depth)
                 assert(depth.bids)
                 assert(depth.asks);
@@ -53,7 +53,8 @@ describe('Btce', function () {
                 }
             });
 
-            apirest.monitorOrderBook("BTCUSD");
+            api.monitorOrderBook("BTCUSD");
         });
+        
     });
 });
