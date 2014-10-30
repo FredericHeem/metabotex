@@ -30,7 +30,7 @@ describe('Btce', function () {
             })
             .fail(done)
         });
-        it('BtceDepth', function (done) {
+        it('BtceDepthBTCUSD', function (done) {
             apirest.getDepth("BTCUSD")
             .then(function(depth){
                 assert(depth)
