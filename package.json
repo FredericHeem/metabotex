@@ -71,8 +71,13 @@
     "coverage": "NODE_ENV=demo istanbul cover _mocha -- test/*.js",
     "coveralls": "npm run-script coverage && coveralls < coverage/lcov.info",
     "codeclimate": "CODECLIMATE_REPO_TOKEN= codeclimate < coverage/lcov.info",
+    "btcelocal":"NODE_ENV=btcelocal node lib/LiquiditerApp.js",
+    "btcedemo":"NODE_ENV=btce nohup node lib/LiquiditerApp.js  > logbtce.txt&",
+    "btceltclocal":"NODE_ENV=btceltclocal node lib/LiquiditerApp.js",
     "bitfinexlocal":"NODE_ENV=bitfinexlocal node lib/LiquiditerApp.js",
     "bitfinexdemo":"NODE_ENV=bitfinex nohup node lib/LiquiditerApp.js  > logbitfinex.txt&",
+    "bitfinexltclocal":"NODE_ENV=bitfinexltclocal node lib/LiquiditerApp.js",
+    "bitfinexdemo":"NODE_ENV=bitfinexltc nohup node lib/LiquiditerApp.js  > logbitfinexltc.txt&",
     "bitstamplocal":"NODE_ENV=bitstamplocal node lib/LiquiditerApp.js",
     "bitstampdemo":"NODE_ENV=bitstamp nohup node lib/LiquiditerApp.js  > logbitstamp.txt&"
         
