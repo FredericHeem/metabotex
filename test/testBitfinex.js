@@ -3,7 +3,7 @@ var assert = require('assert');
 var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
-var config = require('./configTest.js')();
+var config = require('./configTest.js')('bitfinexbtcusdlocal');
 var debug = require('debug')('Airbex');
 var BitfinexEx = require('../lib/Bitfinex');
 var num = require('num');
@@ -14,7 +14,7 @@ describe('Bitfinex', function () {
     
     describe('BitfinexRest', function () {
         before(function(done) {
-            api = new BitfinexEx.RestClient(config.exchanges.bitfinex);
+            api = new BitfinexEx.RestClient(config.provider);
             api.ee().on('error', function(error){
                 assert(error)
                 done(error);

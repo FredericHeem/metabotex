@@ -3,7 +3,7 @@ var assert = require('assert');
 var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
-var config = require('./configTest.js')();
+var config = require('./configTest.js')('bitstampbtcusdlocal');
 var debug = require('debug')('WebSocket');
 var BitstampEx = require('../lib/Bitstamp');
 var num = require('num');
@@ -20,7 +20,7 @@ describe('Bitstamp', function () {
     "use strict";
     
     describe('BitstampWebSocket', function () {
-        var apiws = new BitstampEx.WebSocketClient(config.exchanges.bitstamp);
+        var apiws = new BitstampEx.WebSocketClient(config.provider);
         before(function(done) {
             apiws.start()
             .then(function(){
@@ -68,7 +68,7 @@ describe('Bitstamp', function () {
     });
     
     describe('BitstampRest', function () {
-        var apirest = new BitstampEx.RestClient(config.exchanges.bitstamp);
+        var apirest = new BitstampEx.RestClient(config.provider);
         it('BitstampBalance', function (done) {
             this.timeout(30e3);
             apirest.getBalances()

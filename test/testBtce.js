@@ -3,7 +3,7 @@ var assert = require('assert');
 var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
-var config = require('./configTest.js')();
+var config = require('./configTest.js')('btcebtcusdlocal');
 var debug = require('debug')('Btce');
 var BtceEx = require('../lib/Btce');
 var num = require('num');
@@ -14,7 +14,7 @@ describe('Btce', function () {
     
     describe('BtceRest', function () {
         before(function(done) {
-            apirest = new BtceEx.RestClient(config.exchanges.btce);
+            apirest = new BtceEx.RestClient(config.provider);
             apirest.ee().on('error', function(error){
                 assert(error)
                 done(error);
