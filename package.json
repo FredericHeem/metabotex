@@ -77,7 +77,7 @@
     "bitfinexlocal":"NODE_ENV=bitfinexlocal node lib/LiquiditerApp.js",
     "bitfinexdemo":"NODE_ENV=bitfinex nohup node lib/LiquiditerApp.js  > logbitfinex.txt&",
     "bitfinexltclocal":"NODE_ENV=bitfinexltclocal node lib/LiquiditerApp.js",
-    "bitfinexdemo":"NODE_ENV=bitfinexltc nohup node lib/LiquiditerApp.js  > logbitfinexltc.txt&",
+    "bitfinexltcdemo":"NODE_ENV=bitfinexltc nohup node lib/LiquiditerApp.js  > logbitfinexltc.txt&",
     "bitstamplocal":"NODE_ENV=bitstamplocal node lib/LiquiditerApp.js",
     "bitstampdemo":"NODE_ENV=bitstamp nohup node lib/LiquiditerApp.js  > logbitstamp.txt&"
         
