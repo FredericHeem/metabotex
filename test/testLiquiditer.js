@@ -3,32 +3,59 @@ var assert = require('assert');
 var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
-var config = require('./configTest.js')();
 var debug = require('debug')('WebSocket');
-var BitstampEx = require('../lib/Bitstamp');
 var num = require('num');
 var Liquiditer = require('../lib/Liquiditer')
 
+function getConfig(configName){
+    return require('./configTest.js')(configName);
+}
+
+function startAndStop(app, cb){
+    app.start()
+    .then(function(){
+        setTimeout(function(){
+            app.stop()
+            .then(cb)
+            .fail(cb)
+        }, 10e3)
+    })
+}
 
 describe('Liquiditer', function () {
     "use strict";
-    var market = "BTCUSD";
-//    describe('LiquiditerOk', function () {
-//        var liquiditer = new Liquiditer(config)
-//        before(function(done){
-//            this.timeout(5e3)
-//            liquiditer.start().then(done, done)
-//        }),
-//        it('LiquiditerBalances', function (done) {
-//            liquiditer.getBalances()
-//            .then(done)
-//            .fail(done);
-//        });
-//        it('LiquiditerdDepth', function (done) {
-//            liquiditer.getDepth(market)
-//            .then(done)
-//            .fail(done);
-//        });
-//
-//    });
+    
+    describe('LiquiditerOk', function () {
+        this.timeout(60e3)
+        it('LiquiditerBitstampBTCUSD', function (done) {
+            var config = getConfig('bitstampbtcusdlocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
+        it('LiquiditerBitfinexBTCUSD', function (done) {
+            var config = getConfig('bitfinexbtcusdlocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
+        it('LiquiditerBitfinexLTCBTC', function (done) {
+            var config = getConfig('bitfinexltcbtclocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
+        it('LiquiditerBitfinexDRKBTC', function (done) {
+            var config = getConfig('bitfinexdrkbtclocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
+        it('LiquiditerBtceBTCUSD', function (done) {
+            var config = getConfig('btcebtcusdlocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
+        it('LiquiditerBtceLTCBTC', function (done) {
+            var config = getConfig('btceltcbtclocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
+    });
 });
