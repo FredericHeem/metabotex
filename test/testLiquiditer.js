@@ -25,6 +25,29 @@ function startAndStop(app, cb){
 describe('Liquiditer', function () {
     "use strict";
     
+    describe('LiquiditerKo', function () {
+        this.timeout(60e3)
+        it('LiquiditerUnmonitor', function (done) {
+            var config = getConfig('bitfinexbtcusdlocal');
+            var app = new Liquiditer(config);
+            app.start()
+            .then(function(){
+                setTimeout(function(){
+                    console.log("STOP starts")
+                    app.stop()
+                    .then(function(){
+                        console.log("STOP ends")
+                        setTimeout(function(){
+                            console.log("END")
+                            done()
+                        }, 10e3)
+                    })
+                    .fail(done)
+                }, 5e3)
+            })
+        });
+        
+    });
     describe('LiquiditerOk', function () {
         this.timeout(60e3)
         it('LiquiditerBitstampBTCUSD', function (done) {
