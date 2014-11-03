@@ -13,12 +13,17 @@ describe('Btce', function () {
     var apirest;
     
     describe('BtceRest', function () {
+        var apirest;
         before(function(done) {
             apirest = new BtceEx.RestClient(config.provider);
             apirest.ee().on('error', function(error){
                 assert(error)
                 done(error);
             });
+            done()
+        });
+        after(function(done) {
+            apirest.unmonitorOrderBook()
             done()
         });
         it('BtceBalance', function (done) {

@@ -3,7 +3,7 @@ var assert = require('assert');
 var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
-var debug = require('debug')('WebSocket');
+var debug = require('debug')('testLiquiditer');
 var num = require('num');
 var Liquiditer = require('../lib/Liquiditer')
 
@@ -12,42 +12,27 @@ function getConfig(configName){
 }
 
 function startAndStop(app, cb){
+    debug("STARTING")
     app.start()
+    .delay(10e3)
     .then(function(){
-        setTimeout(function(){
-            app.stop()
-            .then(cb)
-            .fail(cb)
-        }, 10e3)
+        debug("STOPPING")
+        return app.stop()
+    })
+    .delay(10e3)
+    .then(function(){
+        debug("END")
+        cb()
+    })
+    .fail(function(error){
+        log.error("startAndStop:", error)
+        cb(error)
     })
 }
 
 describe('Liquiditer', function () {
     "use strict";
     
-    describe('LiquiditerKo', function () {
-        this.timeout(60e3)
-        it('LiquiditerUnmonitor', function (done) {
-            var config = getConfig('bitfinexbtcusdlocal');
-            var app = new Liquiditer(config);
-            app.start()
-            .then(function(){
-                setTimeout(function(){
-                    console.log("STOP starts")
-                    app.stop()
-                    .then(function(){
-                        console.log("STOP ends")
-                        setTimeout(function(){
-                            console.log("END")
-                            done()
-                        }, 10e3)
-                    })
-                    .fail(done)
-                }, 5e3)
-            })
-        });
-        
-    });
     describe('LiquiditerOk', function () {
         this.timeout(60e3)
         it('LiquiditerBitstampBTCUSD', function (done) {

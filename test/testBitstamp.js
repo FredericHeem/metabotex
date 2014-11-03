@@ -20,8 +20,10 @@ describe('Bitstamp', function () {
     "use strict";
     
     describe('BitstampWebSocket', function () {
-        var apiws = new BitstampEx.WebSocketClient(config.provider);
+        var apiws;
         before(function(done) {
+            this.timeout(5e3)
+            apiws = new BitstampEx.WebSocketClient(config.provider);
             apiws.start()
             .then(function(){
                 debug("started");
