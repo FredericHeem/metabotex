@@ -30,6 +30,23 @@ describe('Airbex', function () {
             })
             .fail(done)
         });
-        
+        it('AirbexCurrencies', function (done) {
+            api.fetchCurrencies()
+            .then(function(currencies){
+                assert(currencies)
+                assert(currencies['BTC'])
+                done();
+            })
+            .fail(done)
+        });
+        it('AirbexMarketsInfo', function (done) {
+            api.fetchMarketsInfo()
+            .then(function(marketsInfo){
+                assert(marketsInfo)
+                assert(marketsInfo['BTCUSD'])
+                done();
+            })
+            .fail(done)
+        });
     });
 });
