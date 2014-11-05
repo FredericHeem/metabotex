@@ -20,6 +20,7 @@
       "bitstamp":"0.1.8",
       "btc-e": "0.0.16",
       "bitfinex":"0.2.8",
+      "cryptsy":"0.1.3",
       "airbex-client":"git://github.com/FredericHeem/airbex-client.git#5c362abe1e846760104a0b378be5a4dd3b0beafd",
       "num": "git://github.com/abrkn/node-num.git#v0.2.3",
       "winston": "0.8.x",

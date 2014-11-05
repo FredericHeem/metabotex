@@ -65,5 +65,10 @@ describe('Liquiditer', function () {
             var app = new Liquiditer(config);
             startAndStop(app, done);
         });
+        it('LiquiditerCryptsyDRKBTC', function (done) {
+            var config = getConfig('cryptsydrkbtclocal');
+            var app = new Liquiditer(config);
+            startAndStop(app, done);
+        });
     });
 });
