@@ -99,4 +99,16 @@ describe('OrderBook', function () {
         });
        
     });
+    describe('filterDepth', function () {
+
+        it('filterDepth1', function (done) {
+            var bids = [];
+            var asks = [];
+            console.log(orderBook.filterDepth(bids, asks))
+            //assert(_.isEqual(orderBook.addFees(asks, fee), result));
+            done();
+        });
+       
+    });
+    
 });
