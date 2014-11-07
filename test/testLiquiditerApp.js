@@ -3,31 +3,53 @@ var assert = require('assert');
 var request = require('supertest');
 var async = require('async');
 var _ = require('underscore');
-//var config = require('./configTest.js')();
+var fs = require("fs");
 var debug = require('debug')('WebSocket');
 var num = require('num');
-var Liquiditer = require('../lib/Liquiditer')
+var LiquiditerApp = require('../lib/LiquiditerApp')
+var Q = require('Q')
+var markets = ['bitstampbtcusdlocal'];
+var markets = [
+               'bitstampbtcusdlocal', 
+               'bitfinexbtcusdlocal',
+               'bitfinexltcbtclocal',
+               'bitfinexdrkbtclocal',
+               'btceltcbtclocal',
+               'cryptsydogebtclocal',
+               'krakenbtceurlocal'
+               ];
 
-
-describe('Liquiditer', function () {
+describe('LiquiditerApp', function () {
     "use strict";
-    
-//    describe('LiquiditerOk', function () {
-//        var liquiditer = new Liquiditer(config)
-//        before(function(done){
-//            this.timeout(5e3)
-//            liquiditer.start().then(done, done)
-//        }),
-//        it('LiquiditerBalances', function (done) {
-//            liquiditer.getBalances()
-//            .then(done)
-//            .fail(done);
-//        });
-//        it('LiquiditerdDepth', function (done) {
-//            liquiditer.getDepth(market)
-//            .then(done)
-//            .fail(done);
-//        });
-//
-//    });
+    var liquiditerApps = [];
+    describe('LiquiditerApp', function () {
+        
+        before(function(done){
+            this.timeout(5e3);
+            _.each(markets, function(market){
+                var config = (JSON.parse(fs.readFileSync("test/config/config." + market + ".json", "utf8")));
+                liquiditerApps.push(new LiquiditerApp(config));
+            })
+            done();
+        })
+        it('LiquiditerAppOk', function (done) {
+            this.timeout(100e3)
+            Q.all(_.map(liquiditerApps, function(liquiditerApp){
+                return liquiditerApp.start();
+            }))
+            .delay(30e3)
+            .then(function(){
+                return Q.all(_.map(liquiditerApps, function(liquiditerApp){
+                    return liquiditerApp.stop();
+                }))
+            })
+            .then(function(){
+                
+            })
+            .then(done)
+            .fail(done);
+        });
+
+
+    });
 });
