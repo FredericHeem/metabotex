@@ -108,6 +108,17 @@ describe('OrderBook', function () {
             //assert(_.isEqual(orderBook.addFees(asks, fee), result));
             done();
         });
+        it('filterDepthKo', function (done) {
+            var bids = ['1e-3', ''];
+            var asks = [];
+            try {
+                console.log(orderBook.filterDepth(bids, asks))
+                done("ko");
+            } catch(e) {
+                console.log(e)
+                done();
+            }
+        });
        
     });
     
