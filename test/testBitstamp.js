@@ -81,5 +81,101 @@ describe('Bitstamp', function () {
             })
             .fail(done)
         });
+        it('BitstampSellPriceDecimalKo', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "ask",
+                    orderType: "market",
+                    amount: "0.001",
+                    price:"500.000"
+            }
+            apirest.order(param)
+            .fail(function(error){
+                assert(error);
+                //assert(error.price);
+                assert(error.__all__);
+                assert.equal(error.__all__[0], "Minimum order size is $5")
+                console.log(JSON.stringify(error))
+                done()
+            })
+            .fail(done)
+        });
+        it('BitstampSellAmountDecimalOk', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "ask",
+                    orderType: "market",
+                    amount: "0.00111111",
+                    price:"500"
+            }
+            apirest.order(param)
+            .fail(function(error){
+                assert(error);
+                //assert(error.price);
+                assert.equal(error.__all__[0], "Minimum order size is $5")
+                assert.equal(error.__all__[0], "Minimum order size is $5")
+                console.log(JSON.stringify(error))
+                done()
+            })
+            .fail(done)
+        });
+        it('BitstampSellBelow', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "ask",
+                    orderType: "market",
+                    amount: "0.001",
+                    price:"500.00"
+            }
+            apirest.order(param)
+            .fail(function(error){
+                assert(error);
+                assert(error.__all__);
+                console.log(JSON.stringify(error))
+                done()
+            })
+            .fail(done)
+        });
+        
+        function orderAndCancel(param, done){
+            var oid;
+            apirest.order(param)
+            .then(function(result){
+                assert(result)
+                assert(result.oid)
+                oid = result.oid
+            })
+            .delay(5e3)
+            .then(function(){
+                return apirest.orderCancel(oid);
+            })
+           .then(done)
+           .fail(done)
+        }
+        it('BitstampSellOk', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "ask",
+                    orderType: "market",
+                    amount: "0.01",
+                    price:"1000"
+            }
+            orderAndCancel(param, done);
+        });
+        it('BitstampBuyOk', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "bid",
+                    orderType: "market",
+                    amount: "0.05",
+                    price:"100"
+            }
+            orderAndCancel(param, done);
+        });
     });
 });

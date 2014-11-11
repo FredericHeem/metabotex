@@ -58,6 +58,32 @@ describe('Kraken', function () {
 
             api.monitorOrderBook("BTCEUR");
         });
-        
+        it('KrakenMarketsInfo', function (done) {
+            this.timeout(10e3);
+            
+            api.fetchMarketsInfo()
+            .then(function(result){
+                assert(result)
+                //console.log(JSON.stringify(result))
+                done();
+            })
+            .fail(done)
+        });
+        it('KrakenSell', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCEUR",
+                    type: "ask",
+                    orderType: "market",
+                    amount: "0.001"
+            }
+            api.order(param)
+            .then(function(result){
+                assert(result)
+                console.log(JSON.stringify(result))
+                done();
+            })
+            .fail(done)
+        });
     });
 });
