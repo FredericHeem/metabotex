@@ -48,7 +48,7 @@ describe('Bitstamp', function () {
                 console.log("total bids: ", totalBidAsk(orderBook.bids));
                 console.log("total asks: ", totalBidAsk(orderBook.asks));
                 numOps++;
-                if(numOps === 5){
+                if(numOps === 3){
                     done();
                 }
             })

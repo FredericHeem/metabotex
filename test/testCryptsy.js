@@ -49,7 +49,7 @@ describe('Cryptsy', function () {
                 assert(depth.bids)
                 assert(depth.asks);
                 numBook++;
-                if(numBook === 3){
+                if(numBook === 2){
                     done();
                 }
             });

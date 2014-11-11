@@ -104,9 +104,13 @@ describe('OrderBook', function () {
         it('filterDepth1', function (done) {
             var bids = [];
             var asks = [];
-            console.log(orderBook.filterDepth(bids, asks))
-            //assert(_.isEqual(orderBook.addFees(asks, fee), result));
-            done();
+            try {
+                console.log(orderBook.filterDepth(bids, asks))
+                done("ko");
+            } catch(e) {
+                console.log(e)
+                done();
+            }
         });
         it('filterDepthKo', function (done) {
             var bids = ['1e-3', ''];

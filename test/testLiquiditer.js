@@ -19,7 +19,7 @@ function startAndStop(app, cb){
         debug("STOPPING")
         return app.stop()
     })
-    .delay(10e3)
+    .delay(2e3)
     .then(function(){
         debug("END")
         cb()
@@ -34,7 +34,7 @@ describe('Liquiditer', function () {
     "use strict";
     
     describe('LiquiditerOk', function () {
-        this.timeout(60e3)
+        this.timeout(20e3)
         it('LiquiditerBitstampBTCUSD', function (done) {
             var config = getConfig('bitstampbtcusdlocal');
             var app = new Liquiditer(config);
@@ -55,18 +55,18 @@ describe('Liquiditer', function () {
             var app = new Liquiditer(config);
             startAndStop(app, done);
         });
-        it('LiquiditerBtceBTCUSD', function (done) {
-            var config = getConfig('btcebtcusdlocal');
-            var app = new Liquiditer(config);
-            startAndStop(app, done);
-        });
+//        it('LiquiditerBtceBTCUSD', function (done) {
+//            var config = getConfig('btcebtcusdlocal');
+//            var app = new Liquiditer(config);
+//            startAndStop(app, done);
+//        });
         it('LiquiditerBtceLTCBTC', function (done) {
             var config = getConfig('btceltcbtclocal');
             var app = new Liquiditer(config);
             startAndStop(app, done);
         });
-        it('LiquiditerCryptsyDRKBTC', function (done) {
-            var config = getConfig('cryptsydrkbtclocal');
+        it('LiquiditerCryptsyDOGEBTC', function (done) {
+            var config = getConfig('cryptsydogebtclocal');
             var app = new Liquiditer(config);
             startAndStop(app, done);
         });
