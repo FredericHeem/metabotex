@@ -7,6 +7,7 @@ var config = require('./configTest.js')('btcebtcusdlocal');
 var debug = require('debug')('Btce');
 var BtceEx = require('../lib/Btce');
 var num = require('num');
+var Utils = require('./Utils');
 
 describe('Btce', function () {
     "use strict";
@@ -59,6 +60,58 @@ describe('Btce', function () {
             });
 
             apirest.monitorOrderBook("BTCUSD");
+        });
+        
+        it('BtceSellLimitOkBTCUSD', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "ask",
+                    orderType: "limit",
+                    price:"500",
+                    amount: "0.01"
+            }
+            Utils.orderAndCancel(apirest, param, done);
+        });
+        it('BtceBuyLimitOkBTCUSD', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"100.11",
+                    amount: "0.01"
+            }
+            Utils.orderAndCancel(apirest, param, done);
+        });
+        
+        it('BtceBuyLimitMin', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"100.11111",
+                    amount: "0.001"
+            }
+            apirest.order(param)
+            .fail(function(error){
+                assert(error)
+                console.log(JSON.stringify(error))
+                done();
+            })
+            .fail(done)
+        });
+        it('BtceButLimitOkLTCBTC', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "LTCBTC",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"0.005",
+                    amount: "0.1"
+            }
+            Utils.orderAndCancel(apirest, param, done);
         });
     });
 });

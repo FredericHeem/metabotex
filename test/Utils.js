@@ -22,8 +22,6 @@ function orderAndCancel(api, param, done){
    .fail(done)
 }
 
-
-
 module.exports = {
         orderAndCancel:orderAndCancel
 };
