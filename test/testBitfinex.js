@@ -7,6 +7,7 @@ var config = require('./configTest.js')('bitfinexbtcusdlocal');
 var debug = require('debug')('Airbex');
 var BitfinexEx = require('../lib/Bitfinex');
 var num = require('num');
+var Utils = require('./Utils');
 
 describe('Bitfinex', function () {
     "use strict";
@@ -55,6 +56,44 @@ describe('Bitfinex', function () {
 
             api.monitorOrderBook("BTCUSD");
         });
-        
+        it('BitfinexSellLimitOk', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "ask",
+                    orderType: "limit",
+                    price:"500",
+                    amount: "0.01"
+            }
+            Utils.orderAndCancel(api, param, done);
+        });
+        it('BitfinexBuyLimitOk', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"100.11111",
+                    amount: "0.01"
+            }
+            Utils.orderAndCancel(api, param, done);
+        });
+        it('BitfinexBuyLimitMin', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCUSD",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"100.11111",
+                    amount: "0.001"
+            }
+            api.order(param)
+            .fail(function(error){
+                assert(error)
+                console.log(JSON.stringify(error))
+                done();
+            })
+            .fail(done)
+        });
     });
 });
