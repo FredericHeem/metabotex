@@ -7,6 +7,7 @@ var config = require('./configTest.js')('bitstampbtcusdlocal');
 var debug = require('debug')('WebSocket');
 var BitstampEx = require('../lib/Bitstamp');
 var num = require('num');
+var Utils = require('./Utils');
 
 function totalBidAsk(bidasks){
     var total = num(0);
@@ -140,42 +141,27 @@ describe('Bitstamp', function () {
             .fail(done)
         });
         
-        function orderAndCancel(param, done){
-            var oid;
-            apirest.order(param)
-            .then(function(result){
-                assert(result)
-                assert(result.oid)
-                oid = result.oid
-            })
-            .delay(5e3)
-            .then(function(){
-                return apirest.orderCancel(oid);
-            })
-           .then(done)
-           .fail(done)
-        }
         it('BitstampSellOk', function (done) {
             this.timeout(10e3);
             var param = {
                     market: "BTCUSD",
                     type: "ask",
-                    orderType: "market",
+                    orderType: "limit",
                     amount: "0.01",
                     price:"1000"
             }
-            orderAndCancel(param, done);
+            Utils.orderAndCancel(apirest, param, done);
         });
         it('BitstampBuyOk', function (done) {
             this.timeout(10e3);
             var param = {
                     market: "BTCUSD",
                     type: "bid",
-                    orderType: "market",
+                    orderType: "limit",
                     amount: "0.05",
                     price:"100"
             }
-            orderAndCancel(param, done);
+            Utils.orderAndCancel(apirest, param, done);
         });
     });
 });

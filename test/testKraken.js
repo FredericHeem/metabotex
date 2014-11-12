@@ -7,6 +7,7 @@ var config = require('./configTest.js')('krakenbtceurlocal');
 var debug = require('debug')('Kraken');
 var KrakenEx = require('../lib/Kraken');
 var num = require('num');
+var Utils = require('./Utils');
 
 describe('Kraken', function () {
     "use strict";
@@ -69,21 +70,44 @@ describe('Kraken', function () {
             })
             .fail(done)
         });
-        it('KrakenSell', function (done) {
+        it('KrakenSellLimitOk', function (done) {
             this.timeout(10e3);
             var param = {
                     market: "BTCEUR",
                     type: "ask",
-                    orderType: "market",
-                    amount: "0.001"
+                    orderType: "limit",
+                    price:"500",
+                    amount: "0.01"
+            }
+            Utils.orderAndCancel(api, param, done);
+        });
+        it('KrakenBuyLimitMin', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCEUR",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"100.11111",
+                    amount: "0.009"
             }
             api.order(param)
-            .then(function(result){
-                assert(result)
-                console.log(JSON.stringify(result))
+            .fail(function(error){
+                assert(error)
+                console.log(JSON.stringify(error))
                 done();
             })
             .fail(done)
+        });
+        it('KrakenBuyLimitOk', function (done) {
+            this.timeout(10e3);
+            var param = {
+                    market: "BTCEUR",
+                    type: "bid",
+                    orderType: "limit",
+                    price:"100.11111",
+                    amount: "0.01"
+            }
+            Utils.orderAndCancel(api, param, done);
         });
     });
 });
