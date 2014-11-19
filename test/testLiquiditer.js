@@ -101,7 +101,7 @@ describe('Liquiditer', function () {
             startAndStop(app, done);
         });
     });
-    describe('LiquiditerOk', function () {
+    describe('TradeOk', function () {
         this.timeout(20e3)
         it('LiquiditerOrderBitstampBuyBTCUSD', function (done) {
             var config = getConfig('bitstampbtcusdlocal');
@@ -123,6 +123,54 @@ describe('Liquiditer', function () {
                 market: "BTCUSD",
                 type: "ask",
                 price:"200",
+                amount: "0.001"
+            }
+            startTradeStop(app, orderParam, done);
+        });
+        it('LiquiditerOrderBitfinexBuyLTCBTC', function (done) {
+            var config = getConfig('bitfinexltcbtclocal');
+            var app = new Liquiditer(config);
+            
+            var orderParam = {
+                market: "LTCBTC",
+                type: "bid",
+                price:"0.03",
+                amount: "0.001"
+            }
+            startTradeStop(app, orderParam, done);
+        });
+        it('LiquiditerOrderBitfinexSellLTCBTC', function (done) {
+            var config = getConfig('bitfinexltcbtclocal');
+            var app = new Liquiditer(config);
+            
+            var orderParam = {
+                market: "LTCBTC",
+                type: "ask",
+                price:"0.005",
+                amount: "0.001"
+            }
+            startTradeStop(app, orderParam, done);
+        });
+        it('LiquiditerOrderBitfinexBuyDRKBTC', function (done) {
+            var config = getConfig('bitfinexdrkbtclocal');
+            var app = new Liquiditer(config);
+            
+            var orderParam = {
+                market: "DRKBTC",
+                type: "bid",
+                price:"0.01",
+                amount: "0.001"
+            }
+            startTradeStop(app, orderParam, done);
+        });
+        it('LiquiditerOrderBitfinexSellDRKBTC', function (done) {
+            var config = getConfig('bitfinexdrkbtclocal');
+            var app = new Liquiditer(config);
+            
+            var orderParam = {
+                market: "DRKBTC",
+                type: "ask",
+                price:"0.001",
                 amount: "0.001"
             }
             startTradeStop(app, orderParam, done);
@@ -158,7 +206,7 @@ describe('Liquiditer', function () {
             var orderParam = {
                 market: "LTCBTC",
                 type: "bid",
-                price:"0.015",
+                price:"0.02",
                 amount: "0.01"
             }
             startTradeStop(app, orderParam, done);

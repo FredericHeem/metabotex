@@ -18,7 +18,7 @@ describe('OrderBook', function () {
             quoteCurrency:'USD',
             quoteScale:5,
             bidMinPrice:'100',
-            bidMaxPrice:'1000'
+            askMaxPrice:'1000'
     }
     var orderBook = new OrderBook(config);
     describe('getAmountBaseFromQuote', function () {
@@ -112,15 +112,17 @@ describe('OrderBook', function () {
                 done();
             }
         });
-        it('filterDepthKo', function (done) {
-            var bids = ['1e-3', ''];
-            var asks = [];
+        it('filterDepthMinAmount', function (done) {
+            var bids = [['400', '17e-5']];
+            var asks = [['500', '1']];
             try {
-                console.log(orderBook.filterDepth(bids, asks))
-                done("ko");
+                var depth = orderBook.filterDepth(bids, asks)
+                assert.equal(depth.bids.length, 0)
+                assert.equal(depth.asks.length, 1)
+                done();
             } catch(e) {
                 console.log(e)
-                done();
+                done("ko");
             }
         });
        
